@@ -2,98 +2,103 @@ package com.example.babydriver
 
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ManipularCircuito : AppCompatActivity() {
+
+    private val databaseReference = FirebaseDatabase.getInstance().getReference("sensor")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manipular_circuito)
 
-        val loggedInUser = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("LOGGED_IN_USER", Usuario::class.java)
-        } else {
-            @Suppress("DEPRECATION") intent.getParcelableExtra<Usuario>("LOGGED_IN_USER")
-        }
-
-        val tvNombreUsuario = findViewById<TextView>(R.id.tvNombreusuarioManipularcircuito)
-        if (loggedInUser != null) {
-            tvNombreUsuario.text = "Usuario: ${loggedInUser.username}"
-        }
-
+        // UI References
         val switchEstado = findViewById<SwitchMaterial>(R.id.swEstadoManipularcircuito)
         val tvEstado = findViewById<TextView>(R.id.tvEstadoManipularcircuito)
         val llDatos = findViewById<LinearLayout>(R.id.llDatosManipularcircuito)
-        val seekBar = findViewById<SeekBar>(R.id.sbDistanciaManipularcircuito)
         val tvDistancia = findViewById<TextView>(R.id.tvDistanciaManipularcircuito)
         val progressBar = findViewById<ProgressBar>(R.id.pbDistanciaManipularcircuito)
         val tvAlerta = findViewById<TextView>(R.id.tvAlertaManipularcircuito)
-        val buttonVolver = findViewById<Button>(R.id.btnVolverManipularcircuito)
+        val buttonVolver = findViewById<android.widget.Button>(R.id.btnVolverManipularcircuito)
 
-        // Lógica del Switch
+        // Listener para recibir la distancia (Monitoreo)
+        val sensorEventListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val distancia = snapshot.child("distancia").getValue(Float::class.java) ?: 0.0f
+                actualizarInterfazUsuario(distancia, tvDistancia, progressBar, tvAlerta)
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        }
+
+        // Listener para el switch (Control)
         switchEstado.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                tvEstado.text = "ENCENDIDO"
-                tvEstado.setTextColor(Color.GREEN)
-                llDatos.visibility = View.VISIBLE
-            } else {
-                tvEstado.text = "APAGADO"
-                tvEstado.setTextColor(Color.RED)
-                llDatos.visibility = View.GONE
-            }
+            databaseReference.child("estado").setValue(isChecked)
+            actualizarEstadoVisual(isChecked, tvEstado, llDatos, sensorEventListener)
         }
 
-        // Lógica del SeekBar para simular la distancia
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                // Actualizar el texto de la distancia
-                tvDistancia.text = "Distancia: $progress cm"
-
-                // Actualizar la barra de progreso (invertida)
-                progressBar.progress = 100 - progress
-
-                // Actualizar color y texto de alerta
-                when (progress) {
-                    in 50..100 -> {
-                        progressBar.progressDrawable.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
-                        tvAlerta.text = "Lejos"
-                        tvAlerta.setTextColor(Color.GREEN)
-                    }
-                    in 25..49 -> {
-                        progressBar.progressDrawable.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN)
-                        tvAlerta.text = "Obstaculo detectado"
-                        tvAlerta.setTextColor(Color.YELLOW)
-                    }
-                    else -> {
-                        progressBar.progressDrawable.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
-                        tvAlerta.text = "Detente"
-                        tvAlerta.setTextColor(Color.RED)
-                    }
-                }
+        // LEER ESTADO INICIAL DEL SENSOR AL ABRIR LA PANTALLA
+        databaseReference.child("estado").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val estadoActual = snapshot.getValue(Boolean::class.java) ?: false
+                switchEstado.isChecked = estadoActual
+                actualizarEstadoVisual(estadoActual, tvEstado, llDatos, sensorEventListener)
             }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            override fun onCancelled(error: DatabaseError) {}
         })
 
-        buttonVolver.setOnClickListener {
-            finish() // Cierra la actividad actual y vuelve a la anterior
-        }
-
-        // Bloquear el gesto de retroceso del sistema
+        buttonVolver.setOnClickListener { finish() }
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // No hacer nada para deshabilitar el botón de retroceso
-            }
+            override fun handleOnBackPressed() {}
         })
+    }
+
+    private fun actualizarEstadoVisual(isActivo: Boolean, tvEstado: TextView, llDatos: LinearLayout, listener: ValueEventListener) {
+        if (isActivo) {
+            tvEstado.text = "SISTEMA ACTIVO"
+            tvEstado.setTextColor(Color.GREEN)
+            llDatos.visibility = View.VISIBLE
+            databaseReference.addValueEventListener(listener)
+        } else {
+            tvEstado.text = "SISTEMA APAGADO"
+            tvEstado.setTextColor(Color.RED)
+            llDatos.visibility = View.GONE
+            databaseReference.removeEventListener(listener)
+        }
+    }
+
+    private fun actualizarInterfazUsuario(distancia: Float, tv: TextView, pb: ProgressBar, alerta: TextView) {
+        val distInt = distancia.toInt()
+        tv.text = "Distancia Real: $distInt cm"
+        pb.progress = (100 - distInt).coerceIn(0, 100)
+
+        when {
+            distInt > 50 -> {
+                pb.progressDrawable.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
+                alerta.text = "Zona Segura"
+                alerta.setTextColor(Color.GREEN)
+            }
+            distInt > 25 -> {
+                pb.progressDrawable.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN)
+                alerta.text = "Precaución"
+                alerta.setTextColor(Color.YELLOW)
+            }
+            else -> {
+                pb.progressDrawable.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
+                alerta.text = "¡PELIGRO!"
+                alerta.setTextColor(Color.RED)
+            }
+        }
     }
 }

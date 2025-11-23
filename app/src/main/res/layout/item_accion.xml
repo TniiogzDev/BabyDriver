@@ -1,121 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="#50000000"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/border"
+    android.layout_margin="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvAccionItem"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:text="Acción"
+        android:textStyle="bold"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tvLabelfechaItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvFechaItem"
+        android;android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha"
+        android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/tvValuefechaItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=": 01-01-2025"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toEndOf="@+id/glItemaccion"
-            app:layout_constraintTop_toTopOf="@+id/tvLabelfechaItemaccion" />
-
-        <TextView
-            android:id="@+id/tvLabelhoraItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hora"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelfechaItemaccion" />
-
-        <TextView
-            android:id="@+id/tvValuehoraItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=": 00:00:00"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toEndOf="@+id/glItemaccion"
-            app:layout_constraintTop_toTopOf="@+id/tvLabelhoraItemaccion" />
-
-        <TextView
-            android:id="@+id/tvLabelusuarioItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Usuario"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelhoraItemaccion" />
-
-        <TextView
-            android:id="@+id/tvValueusuarioItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=": 11.111.111-1"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toEndOf="@+id/glItemaccion"
-            app:layout_constraintTop_toTopOf="@+id/tvLabelusuarioItemaccion" />
-
-        <TextView
-            android:id="@+id/tvLabelaccionItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Acción"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelusuarioItemaccion" />
-
-        <TextView
-            android:id="@+id/tvValueaccionItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=": Obstáculo Detectado"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toEndOf="@+id/glItemaccion"
-            app:layout_constraintTop_toTopOf="@+id/tvLabelaccionItemaccion" />
-
-        <TextView
-            android:id="@+id/tvLabeldistanciaItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Distancia"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelaccionItemaccion" />
-
-        <TextView
-            android:id="@+id/tvValuedistanciaItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=": 37cm"
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toEndOf="@+id/glItemaccion"
-            app:layout_constraintTop_toTopOf="@+id/tvLabeldistanciaItemaccion" />
-        
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/glItemaccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>
