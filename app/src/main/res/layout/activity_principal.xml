@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Principal">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottiePrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTituloPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Bienvenido"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPerfilPrincipal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/perfil_icon"
+        app:layout_constraintEnd_toStartOf="@+id/tvLoginPrincipal"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloPrincipal" />
+
+    <TextView
+        android:id="@+id/tvLoginPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="| Login"
+        android:textColor="@android:color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPerfilPrincipal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivPerfilPrincipal"
+        app:layout_constraintTop_toTopOf="@+id/ivPerfilPrincipal" />
+
+    <EditText
+        android:id="@+id/txtUsuPrincipal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/background_texto_redondeado"
+        android:hint="Nombre de Usuario"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPerfilPrincipal" />
+
+    <EditText
+        android:id="@+id/txtConPrincipal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_texto_redondeado"
+        android:hint="Ingrese contraseña"
+        android:inputType="numberPassword"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/txtUsuPrincipal"
+        app:layout_constraintStart_toStartOf="@+id/txtUsuPrincipal"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsuPrincipal" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIniPrincipal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Iniciar Sesion"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#50000000"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtConPrincipal"
+        app:layout_constraintStart_toStartOf="@+id/txtConPrincipal"
+        app:layout_constraintTop_toBottomOf="@+id/txtConPrincipal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

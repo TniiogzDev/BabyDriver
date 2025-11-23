@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887021399849",
+    "project_id": "babydriver-inacap",
+    "storage_bucket": "babydriver-inacap.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887021399849:android:8887e6d959e4aac276d138",
+        "android_client_info": {
+          "package_name": "com.example.babydriver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3CEIr9BXwrRks4Oiwc4zBbpMVJOuC88A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

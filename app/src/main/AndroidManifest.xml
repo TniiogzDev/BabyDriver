@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BabyDriver">
+        <activity
+            android:name=".Principal"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Menu_Admin" />
+        <activity android:name=".Menu_Operador" />
+        <activity android:name=".Menu_Auditor" />
+        <activity android:name=".VCrearUsuario" />
+        <activity android:name=".VGestionUsuarios" />
+        <activity android:name=".VEditarUsuario" />
+        <activity android:name=".ManipularCircuito" />
+        <activity android:name=".VerAcciones" />
+        <activity android:name=".Estadisticas" />
+        <activity android:name=".VerPerfil" />
+        <activity android:name=".easter_egg" />
+    </application>
+
+</manifest>
