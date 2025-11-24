@@ -1,4 +1,3 @@
-
 package com.example.babydriver
 
 import android.os.Build
@@ -33,7 +32,8 @@ class VerAcciones : AppCompatActivity() {
 
         val tvNombreUsuario = findViewById<TextView>(R.id.tvNombreusuarioVeracciones)
         if (loggedInUser != null) {
-            tvNombreUsuario.text = "Usuario: ${loggedInUser.username}"
+            // CORREGIDO: Se usa .rut en lugar de .username
+            tvNombreUsuario.text = "Usuario: ${loggedInUser.rut}"
         }
 
         recyclerView = findViewById(R.id.rvAcciones)

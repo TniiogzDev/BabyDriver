@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".Estadisticas">
+
+    <!-- La animación de fondo se mantiene igual -->
 
     <TextView
         android:id="@+id/tvTituloEstadisticas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estadísticas del Sensor"
-        android:textSize="24sp"
+        android:textSize="28sp"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"/>
 
@@ -22,59 +26,80 @@
         android:layout_below="@id/tvTituloEstadisticas"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
+        android:textColor="#E0E0E0"
         android:text="Usuario: nombre"/>
 
-    <LinearLayout
-        android:id="@+id/llStatsContainer"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvNombreusuarioEstadisticas"
+        android:layout_below="@+id/tvNombreusuarioEstadisticas"
         android:layout_marginTop="24dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:background="@drawable/border">
+        app:cardBackgroundColor="#30FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
 
-        <TextView
-            android:id="@+id/tvDistanciaActualEstadisticas"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llStatsContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Distancia Actual: -- cm" 
-            android:textSize="18sp"/>
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/tvTotalAlertas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Total de Alertas: --" 
-            android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/tvDistanciaActualEstadisticas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distancia Actual: -- cm"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/tvPeligroCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="- Peligro: --"
-            android:textColor="@android:color/holo_red_dark" 
-            android:textSize="16sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#80FFFFFF"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:id="@+id/tvPrecaucionCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="- Precaución: --"
-            android:textColor="@android:color/holo_orange_light" 
-            android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvTotalAlertas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total de Alertas: --"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/tvSeguraCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="- Zona Segura: --"
-            android:textColor="@android:color/holo_green_dark" 
-            android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvPeligroCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="- Peligro: --"
+                android:textColor="#FF8A80" 
+                android:textSize="16sp"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvPrecaucionCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="- Precaución: --"
+                android:textColor="#FFFF8D" 
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tvSeguraCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="- Zona Segura: --"
+                android:textColor="#B9F6CA" 
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnVolverEstadisticas"

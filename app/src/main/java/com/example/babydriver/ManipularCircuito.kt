@@ -1,13 +1,15 @@
 package com.example.babydriver
 
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -24,7 +26,6 @@ class ManipularCircuito : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manipular_circuito)
 
-        // UI References
         val switchEstado = findViewById<SwitchMaterial>(R.id.swEstadoManipularcircuito)
         val tvEstado = findViewById<TextView>(R.id.tvEstadoManipularcircuito)
         val llDatos = findViewById<LinearLayout>(R.id.llDatosManipularcircuito)
@@ -33,7 +34,6 @@ class ManipularCircuito : AppCompatActivity() {
         val tvAlerta = findViewById<TextView>(R.id.tvAlertaManipularcircuito)
         val buttonVolver = findViewById<android.widget.Button>(R.id.btnVolverManipularcircuito)
 
-        // Listener para recibir la distancia (Monitoreo)
         val sensorEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val distancia = snapshot.child("distancia").getValue(Float::class.java) ?: 0.0f
@@ -42,13 +42,11 @@ class ManipularCircuito : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {}
         }
 
-        // Listener para el switch (Control)
         switchEstado.setOnCheckedChangeListener { _, isChecked ->
             databaseReference.child("estado").setValue(isChecked)
             actualizarEstadoVisual(isChecked, tvEstado, llDatos, sensorEventListener)
         }
 
-        // LEER ESTADO INICIAL DEL SENSOR AL ABRIR LA PANTALLA
         databaseReference.child("estado").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val estadoActual = snapshot.getValue(Boolean::class.java) ?: false
@@ -83,22 +81,31 @@ class ManipularCircuito : AppCompatActivity() {
         tv.text = "Distancia Real: $distInt cm"
         pb.progress = (100 - distInt).coerceIn(0, 100)
 
-        when {
+        // CORREGIDO: Lógica de colores de ProgressBar actualizada
+        val color = when {
             distInt > 50 -> {
-                pb.progressDrawable.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
                 alerta.text = "Zona Segura"
                 alerta.setTextColor(Color.GREEN)
+                Color.GREEN
             }
             distInt > 25 -> {
-                pb.progressDrawable.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN)
                 alerta.text = "Precaución"
                 alerta.setTextColor(Color.YELLOW)
+                Color.YELLOW
             }
             else -> {
-                pb.progressDrawable.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
                 alerta.text = "¡PELIGRO!"
                 alerta.setTextColor(Color.RED)
+                Color.RED
             }
+        }
+
+        // Aplicar el color usando el método correcto según la versión de Android
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            pb.progressDrawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+        } else {
+            @Suppress("DEPRECATION")
+            pb.progressDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         }
     }
 }

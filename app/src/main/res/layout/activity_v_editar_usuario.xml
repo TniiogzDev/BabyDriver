@@ -19,6 +19,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnPauseEditarusuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_pause"
+            android:layout_marginEnd="16dp"/>
+
+        <ImageButton
+            android:id="@+id/btnMuteEditarusuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_lock_silent_mode_off" />
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -36,6 +62,7 @@
                 android:id="@+id/tvTituloEditarusuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
                 android:layout_marginBottom="32dp"
                 android:text="Editar Usuario"
                 android:textColor="@android:color/white"
@@ -48,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/background_texto_redondeado"
-                android:hint="Username"
+                android:hint="RUT"
                 android:padding="16dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
@@ -103,30 +130,6 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/background_texto_redondeado"
                 android:padding="12dp" />
-                
-            <EditText
-                android:id="@+id/txtConEditarusuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/background_texto_redondeado"
-                android:hint="Nueva Contraseña (opcional)"
-                android:inputType="textPassword"
-                android:padding="16dp"
-                android:textColor="@android:color/white"
-                android:textColorHint="#CCCCCC" />
-
-            <EditText
-                android:id="@+id/txtRepconEditarusuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/background_texto_redondeado"
-                android:hint="Repetir Nueva Contraseña"
-                android:inputType="textPassword"
-                android:padding="16dp"
-                android:textColor="@android:color/white"
-                android:textColorHint="#CCCCCC" />
 
             <LinearLayout
                 android:layout_width="match_parent"

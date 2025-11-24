@@ -1,4 +1,3 @@
-
 package com.example.babydriver
 
 import android.os.Build
@@ -35,7 +34,8 @@ class Estadisticas : AppCompatActivity() {
 
         val tvNombreUsuario = findViewById<TextView>(R.id.tvNombreusuarioEstadisticas)
         if (loggedInUser != null) {
-            tvNombreUsuario.text = "Usuario: ${loggedInUser.username}"
+            // CORREGIDO: Se usa .rut en lugar del .username que fue eliminado de la clase Usuario
+            tvNombreUsuario.text = "Usuario: ${loggedInUser.rut}"
         }
 
         tvDistanciaActual = findViewById(R.id.tvDistanciaActualEstadisticas)

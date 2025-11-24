@@ -1,64 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="#50000000"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/border">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/tvUsuarioRut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RUT: 12.345.678-9"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvUsuarioNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: John Doe"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <TextView
-            android:id="@+id/tvNombreItemusuario"
+            android:id="@+id/tvUsuarioPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="John Doe"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnEditarItemusuario" />
+            android:layout_weight="1"
+            android:text="Contraseña: •••••••••"/>
 
-        <TextView
-            android:id="@+id/tvCargoItemusuario"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Operador"
-            android:textColor="#CCCCCC"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNombreItemusuario"
-            app:layout_constraintEnd_toEndOf="@+id/tvNombreItemusuario" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEditarItemusuario"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+        <Button
+            android:id="@+id/btnVerPassword"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar"
-            android:textColor="#FFC107"
-            app:layout_constraintEnd_toStartOf="@+id/btnEliminarItemusuario"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_height="40dp"
+            android:text="Ver"/>
+    </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEliminarItemusuario"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:textColor="#F44336"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

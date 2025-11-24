@@ -20,6 +20,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnPausePrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_pause"
+            android:layout_marginEnd="16dp"/>
+
+        <ImageButton
+            android:id="@+id/btnMutePrincipal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_lock_silent_mode_off" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvTituloPrincipal"
         android:layout_width="wrap_content"
@@ -63,15 +89,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="40dp" 
         android:layout_marginEnd="32dp"
         android:background="@drawable/background_texto_redondeado"
-        android:hint="Nombre de Usuario"
+        android:hint="RUT"
         android:padding="12dp"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPerfilPrincipal" />
 
@@ -82,7 +107,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/background_texto_redondeado"
         android:hint="Ingrese contraseña"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:padding="12dp"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
@@ -94,7 +119,7 @@
         android:id="@+id/btnIniPrincipal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:text="Iniciar Sesion"
         android:textColor="@android:color/white"
         app:backgroundTint="#50000000"

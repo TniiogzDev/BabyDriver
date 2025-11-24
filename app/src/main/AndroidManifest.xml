@@ -36,6 +36,7 @@
         <activity android:name=".Estadisticas" />
         <activity android:name=".VerPerfil" />
         <activity android:name=".easter_egg" />
+        <activity android:name=".VerUsuarios" />
     </application>
 
 </manifest>
